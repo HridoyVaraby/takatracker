@@ -35,11 +35,11 @@ class DatabaseService {
       );
 
       await this.db.open();
-      
+
       // Create tables
       await this.db.execute(createTablesSQL);
       await this.db.execute(createAuthTablesSQL);
-      
+
       this.isInitialized = true;
       console.log('Database initialized successfully');
     } catch (error) {
@@ -107,14 +107,14 @@ class DatabaseService {
     }
     let query = 'SELECT * FROM transactions';
     const params: any[] = [];
-    
+
     if (accountId) {
       query += ' WHERE account_id = ?';
       params.push(accountId);
     }
-    
+
     query += ' ORDER BY date DESC, created_at DESC';
-    
+
     const result = await this.db!.query(query, params);
     return result.values || [];
   }
@@ -173,7 +173,7 @@ class DatabaseService {
     if (this.isWebPlatform()) {
       return webFallbackDatabase.getDashboardSummary();
     }
-    
+
     // Get total income and expenses
     const summaryResult = await this.db!.query(`
       SELECT 
@@ -181,9 +181,9 @@ class DatabaseService {
         SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) as total_expenses
       FROM transactions
     `);
-    
+
     const summary = summaryResult.values?.[0] || { total_income: 0, total_expenses: 0 };
-    
+
     // Get account balances
     const balancesResult = await this.db!.query(`
       SELECT 
@@ -195,7 +195,7 @@ class DatabaseService {
       GROUP BY a.id, a.name
       ORDER BY a.name
     `);
-    
+
     return {
       totalIncome: summary.total_income || 0,
       totalExpenses: summary.total_expenses || 0,
@@ -210,7 +210,7 @@ class DatabaseService {
     if (this.isWebPlatform()) {
       return webFallbackDatabase.executeQuery(query, params);
     }
-    
+
     if (query.trim().toUpperCase().startsWith('INSERT')) {
       const result = await this.db!.run(query, params);
       return [result.changes?.lastId || 0];

@@ -28,11 +28,15 @@ class AuthService {
 
   async register(userData: RegisterData): Promise<{ success: boolean; message: string; user?: User }> {
     try {
+      console.log('Registration attempt for:', userData.username, userData.email); // Debug
+      
       // Check if username or email already exists
       const existingUsers = await databaseService.executeQuery(
         'SELECT username, email FROM users WHERE username = ? OR email = ?',
         [userData.username, userData.email]
       );
+
+      console.log('Existing users check:', existingUsers); // Debug
 
       if (existingUsers.length > 0) {
         const existing = existingUsers[0];
@@ -60,6 +64,8 @@ class AuthService {
       // Hash password
       const salt = this.generateSalt();
       const passwordHash = await this.hashPassword(userData.password, salt);
+      
+      console.log('Generated salt and hash:', { salt, passwordHash }); // Debug
 
       // Create user
       const result = await databaseService.executeQuery(
@@ -67,6 +73,7 @@ class AuthService {
         [userData.username, userData.email, passwordHash, salt]
       );
 
+      console.log('User creation result:', result); // Debug
       const userId = result[0];
 
       const user: User = {
@@ -76,6 +83,7 @@ class AuthService {
         is_active: true
       };
 
+      console.log('Created user object:', user); // Debug
       return { success: true, message: 'Account created successfully', user };
     } catch (error) {
       console.error('Registration error:', error);
@@ -85,21 +93,35 @@ class AuthService {
 
   async login(credentials: LoginCredentials): Promise<{ success: boolean; message: string; user?: User }> {
     try {
+      console.log('=== LOGIN ATTEMPT ===');
+      console.log('Credentials:', credentials);
+      
       // Get user by username
       const users = await databaseService.executeQuery(
         'SELECT * FROM users WHERE username = ? AND is_active = 1',
         [credentials.username]
       );
 
+      console.log('Users found:', users.length, users);
+
       if (users.length === 0) {
+        console.log('No users found - returning invalid credentials');
         return { success: false, message: 'Invalid username or password' };
       }
 
       const user = users[0];
+      console.log('User found:', user);
 
       // Verify password
       const hashedPassword = await this.hashPassword(credentials.password, user.salt);
+      console.log('Password verification:', { 
+        provided: hashedPassword, 
+        stored: user.password_hash, 
+        match: hashedPassword === user.password_hash 
+      });
+      
       if (hashedPassword !== user.password_hash) {
+        console.log('Password mismatch - returning invalid credentials');
         return { success: false, message: 'Invalid username or password' };
       }
 

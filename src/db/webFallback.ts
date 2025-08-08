@@ -110,25 +110,43 @@ class WebFallbackDatabase {
   async executeQuery(query: string, params: any[] = []): Promise<any[]> {
     const queryUpper = query.trim().toUpperCase();
     
-    if (queryUpper.includes('SELECT') && queryUpper.includes('users')) {
-      if (queryUpper.includes('WHERE username')) {
-        const username = params[0];
-        const user = this.users.find(u => u.username === username && u.is_active);
-        return user ? [user] : [];
-      }
-      if (queryUpper.includes('WHERE username = ? OR email = ?')) {
+
+    
+    // Handle user queries
+    if (queryUpper.includes('SELECT') && queryUpper.includes('USERS')) {
+      // Check for duplicate username/email during registration
+      if (queryUpper.includes('USERNAME') && queryUpper.includes('EMAIL') && queryUpper.includes('OR')) {
         const [username, email] = params;
         const user = this.users.find(u => u.username === username || u.email === email);
+        console.log('Duplicate check result:', user ? [user] : []);
         return user ? [user] : [];
       }
-      if (queryUpper.includes('WHERE id = ?')) {
+      
+      // Login query - get user by username
+      if (queryUpper.includes('SELECT *') && queryUpper.includes('USERNAME = ?') && queryUpper.includes('IS_ACTIVE = 1') && params.length === 1) {
+        const username = params[0];
+        const user = this.users.find(u => u.username === username && u.is_active);
+        console.log('Login lookup result:', user ? [user] : []);
+        return user ? [user] : [];
+      }
+      
+      // Get user by ID
+      if (queryUpper.includes('WHERE ID = ?') && params.length === 1) {
         const id = params[0];
         const user = this.users.find(u => u.id === id);
         return user ? [user] : [];
       }
+      
+      // Get user password data for password change
+      if (queryUpper.includes('PASSWORD_HASH') && queryUpper.includes('SALT') && queryUpper.includes('WHERE ID = ?')) {
+        const id = params[0];
+        const user = this.users.find(u => u.id === id);
+        return user ? [{ password_hash: user.password_hash, salt: user.salt }] : [];
+      }
     }
     
-    if (queryUpper.includes('INSERT INTO users')) {
+    // Insert new user
+    if (queryUpper.includes('INSERT') && queryUpper.includes('users') && params.length === 4) {
       const [username, email, password_hash, salt] = params;
       const newUser = {
         id: this.nextUserId++,
@@ -137,13 +155,16 @@ class WebFallbackDatabase {
         password_hash,
         salt,
         created_at: new Date().toISOString(),
+        last_login: null,
         is_active: true
       };
       this.users.push(newUser);
+      console.log('Created user:', newUser);
       return [newUser.id];
     }
     
-    if (queryUpper.includes('INSERT INTO user_sessions')) {
+    // Insert new session
+    if (queryUpper.includes('INSERT') && queryUpper.includes('user_sessions') && params.length === 3) {
       const [user_id, session_token, expires_at] = params;
       const newSession = {
         id: this.nextSessionId++,
@@ -153,40 +174,55 @@ class WebFallbackDatabase {
         created_at: new Date().toISOString()
       };
       this.sessions.push(newSession);
+      console.log('Created session:', newSession);
       return [newSession.id];
     }
     
+    // Get session
     if (queryUpper.includes('SELECT') && queryUpper.includes('user_sessions')) {
-      const sessionToken = params[0];
-      const session = this.sessions.find(s => s.session_token === sessionToken && new Date(s.expires_at) > new Date());
-      return session ? [session] : [];
+      if (queryUpper.includes('session_token') && queryUpper.includes('expires_at') && params.length === 2) {
+        const [sessionToken, currentTime] = params;
+        const session = this.sessions.find(s => 
+          s.session_token === sessionToken && 
+          new Date(s.expires_at) > new Date(currentTime)
+        );
+        return session ? [session] : [];
+      }
     }
     
-    if (queryUpper.includes('UPDATE users SET last_login')) {
+    // Update user last login
+    if (queryUpper.includes('UPDATE') && queryUpper.includes('users') && queryUpper.includes('last_login') && params.length === 2) {
       const [lastLogin, userId] = params;
       const user = this.users.find(u => u.id === userId);
       if (user) {
         user.last_login = lastLogin;
+        console.log('Updated last login for user:', userId);
       }
       return [];
     }
     
-    if (queryUpper.includes('UPDATE users SET password_hash')) {
+    // Update user password
+    if (queryUpper.includes('UPDATE') && queryUpper.includes('users') && queryUpper.includes('password_hash') && params.length === 3) {
       const [passwordHash, salt, userId] = params;
       const user = this.users.find(u => u.id === userId);
       if (user) {
         user.password_hash = passwordHash;
         user.salt = salt;
+        console.log('Updated password for user:', userId);
       }
       return [];
     }
     
-    if (queryUpper.includes('DELETE FROM user_sessions')) {
+    // Delete session
+    if (queryUpper.includes('DELETE') && queryUpper.includes('user_sessions') && params.length === 1) {
       const sessionToken = params[0];
+      const initialLength = this.sessions.length;
       this.sessions = this.sessions.filter(s => s.session_token !== sessionToken);
+      console.log('Deleted sessions:', initialLength - this.sessions.length);
       return [];
     }
     
+    console.log('Unhandled query:', query);
     return [];
   }
 

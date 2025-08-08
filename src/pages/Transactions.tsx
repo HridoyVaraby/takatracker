@@ -125,7 +125,7 @@ export const Transactions = () => {
           </div>
         ) : transactions.length === 0 ? (
           <div className="card text-center py-8">
-            <p className="text-gray-500 mb-4">No transactions found</p>
+            <p className="text-muted mb-4">No transactions found</p>
             <button
               onClick={handleAddTransaction}
               className="btn btn-primary"
@@ -143,20 +143,20 @@ export const Transactions = () => {
                       <span className="text-lg">
                         {transaction.type === 'income' ? '💰' : '💸'}
                       </span>
-                      <span className="font-medium text-gray-900">
+                      <span className="font-medium text-primary">
                         {transaction.category}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-1">
+                    <p className="text-sm text-muted mb-1">
                       {getAccountName(transaction.account_id)} • {formatDate(transaction.date)}
                     </p>
                     {transaction.notes && (
-                      <p className="text-sm text-gray-500">{transaction.notes}</p>
+                      <p className="text-sm text-muted">{transaction.notes}</p>
                     )}
                   </div>
                   <div className="text-right">
                     <p className={`text-lg font-bold ${
-                      transaction.type === 'income' ? 'text-success' : 'text-danger'
+                      transaction.type === 'income' ? 'income-indicator' : 'expense-indicator'
                     }`}>
                       {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                     </p>
@@ -169,7 +169,7 @@ export const Transactions = () => {
                       </button>
                       <button
                         onClick={() => handleDeleteTransaction(transaction.id!)}
-                        className="text-xs text-danger hover:text-red-700 px-2 py-1"
+                        className="text-xs text-red-500 hover:text-red-700 px-2 py-1"
                       >
                         Delete
                       </button>

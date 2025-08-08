@@ -40,14 +40,14 @@ export const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-surface-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="card">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="text-4xl mb-4">💰</div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">TakaTracker</h1>
-            <p className="text-gray-600">Sign in to your account</p>
+            <h1 className="text-2xl font-bold text-primary mb-2">TakaTracker</h1>
+            <p className="text-muted">Sign in to your account</p>
           </div>
 
           {/* Error Message */}
@@ -60,7 +60,7 @@ export const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Username
               </label>
               <input
@@ -75,7 +75,7 @@ export const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Password
               </label>
               <input
@@ -100,7 +100,7 @@ export const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
 
           {/* Switch to Register */}
           <div className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-muted">
               Don't have an account?{' '}
               <button
                 onClick={onSwitchToRegister}
@@ -113,8 +113,8 @@ export const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
           </div>
 
           {/* Privacy Note */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+          <div className="mt-6 pt-6 border-t border-surface-200">
+            <div className="flex items-center gap-2 text-sm text-muted">
               <span>🔒</span>
               <span>Your data stays on your device - fully offline</span>
             </div>

@@ -69,14 +69,14 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-surface-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="card">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="text-4xl mb-4">💰</div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">TakaTracker</h1>
-            <p className="text-gray-600">Create your account</p>
+            <h1 className="text-2xl font-bold text-primary mb-2">TakaTracker</h1>
+            <p className="text-muted">Create your account</p>
           </div>
 
           {/* Error Message */}
@@ -89,7 +89,7 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
           {/* Registration Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Username
               </label>
               <input
@@ -102,11 +102,11 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
                 disabled={loading}
                 minLength={3}
               />
-              <p className="text-xs text-gray-500 mt-1">At least 3 characters</p>
+              <p className="text-xs text-muted mt-1">At least 3 characters</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Email
               </label>
               <input
@@ -121,7 +121,7 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Password
               </label>
               <input
@@ -134,11 +134,11 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
                 disabled={loading}
                 minLength={6}
               />
-              <p className="text-xs text-gray-500 mt-1">At least 6 characters</p>
+              <p className="text-xs text-muted mt-1">At least 6 characters</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Confirm Password
               </label>
               <input
@@ -163,7 +163,7 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
 
           {/* Switch to Login */}
           <div className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-muted">
               Already have an account?{' '}
               <button
                 onClick={onSwitchToLogin}
@@ -176,13 +176,13 @@ export const Register = ({ onRegister, onSwitchToLogin }: RegisterProps) => {
           </div>
 
           {/* Privacy Note */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
+          <div className="mt-6 pt-6 border-t border-surface-200">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center gap-2 text-sm text-muted">
                 <span>🔒</span>
                 <span>Your data stays on your device - fully offline</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center gap-2 text-sm text-muted">
                 <span>🛡️</span>
                 <span>No data is sent to external servers</span>
               </div>

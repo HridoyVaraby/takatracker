@@ -148,26 +148,26 @@ export const Settings = () => {
         {/* Account Info */}
         {currentUser && (
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Account Information</h3>
+            <h3 className="text-lg font-semibold text-primary mb-4">Account Information</h3>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-600">Username</span>
-                <span className="font-medium">{currentUser.username}</span>
+                <span className="text-muted">Username</span>
+                <span className="font-medium text-primary">{currentUser.username}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Email</span>
-                <span className="font-medium">{currentUser.email}</span>
+                <span className="text-muted">Email</span>
+                <span className="font-medium text-primary">{currentUser.email}</span>
               </div>
               {currentUser.last_login && (
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Last Login</span>
-                  <span className="font-medium text-sm">
+                  <span className="text-muted">Last Login</span>
+                  <span className="font-medium text-sm text-primary">
                     {new Date(currentUser.last_login).toLocaleDateString()}
                   </span>
                 </div>
               )}
             </div>
-            <div className="mt-4 pt-4 border-t border-gray-200">
+            <div className="mt-4 pt-4 border-t border-surface-200">
               <button
                 onClick={() => setShowChangePassword(!showChangePassword)}
                 className="btn btn-secondary w-full"
@@ -181,7 +181,7 @@ export const Settings = () => {
         {/* Change Password Form */}
         {showChangePassword && (
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Change Password</h3>
+            <h3 className="text-lg font-semibold text-primary mb-4">Change Password</h3>
             
             {passwordError && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
@@ -190,14 +190,14 @@ export const Settings = () => {
             )}
             
             {passwordSuccess && (
-              <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4">
+              <div className="bg-accent-50 border border-accent-200 text-accent-700 px-4 py-3 rounded-lg mb-4">
                 {passwordSuccess}
               </div>
             )}
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-primary mb-2">
                   Current Password
                 </label>
                 <input
@@ -211,7 +211,7 @@ export const Settings = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-primary mb-2">
                   New Password
                 </label>
                 <input
@@ -226,7 +226,7 @@ export const Settings = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-primary mb-2">
                   Confirm New Password
                 </label>
                 <input
@@ -267,30 +267,30 @@ export const Settings = () => {
 
         {/* App Info */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">App Information</h3>
+          <h3 className="text-lg font-semibold text-primary mb-4">App Information</h3>
           <div className="space-y-2">
             <div className="flex justify-between">
-              <span className="text-gray-600">App Name</span>
-              <span className="font-medium">TakaTracker</span>
+              <span className="text-muted">App Name</span>
+              <span className="font-medium text-primary">TakaTracker</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Version</span>
-              <span className="font-medium">1.0.0</span>
+              <span className="text-muted">Version</span>
+              <span className="font-medium text-primary">1.0.0</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Platform</span>
-              <span className="font-medium">Android (Capacitor)</span>
+              <span className="text-muted">Platform</span>
+              <span className="font-medium text-primary">Android (Capacitor)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Storage</span>
-              <span className="font-medium">SQLite (Offline)</span>
+              <span className="text-muted">Storage</span>
+              <span className="font-medium text-primary">SQLite (Offline)</span>
             </div>
           </div>
         </div>
 
         {/* Data Management */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Data Management</h3>
+          <h3 className="text-lg font-semibold text-primary mb-4">Data Management</h3>
           <div className="space-y-3">
             <button
               onClick={handleExportData}
@@ -299,7 +299,7 @@ export const Settings = () => {
             >
               {exporting ? 'Exporting...' : '📤 Export Data (JSON)'}
             </button>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted">
               Export all your accounts and transactions to a JSON file for backup or transfer.
             </p>
           </div>
@@ -307,13 +307,13 @@ export const Settings = () => {
 
         {/* Privacy & Security */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Privacy & Security</h3>
+          <h3 className="text-lg font-semibold text-primary mb-4">Privacy & Security</h3>
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <span className="text-2xl">🔒</span>
               <div>
-                <p className="font-medium text-gray-800">Fully Offline</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium text-primary">Fully Offline</p>
+                <p className="text-sm text-muted">
                   All your data is stored locally on your device. No data is sent to external servers.
                 </p>
               </div>
@@ -321,8 +321,8 @@ export const Settings = () => {
             <div className="flex items-center gap-3">
               <span className="text-2xl">🛡️</span>
               <div>
-                <p className="font-medium text-gray-800">No Tracking</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium text-primary">No Tracking</p>
+                <p className="text-sm text-muted">
                   TakaTracker doesn't collect any personal information or usage analytics.
                 </p>
               </div>
@@ -332,7 +332,7 @@ export const Settings = () => {
 
         {/* Account Actions */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Account Actions</h3>
+          <h3 className="text-lg font-semibold text-primary mb-4">Account Actions</h3>
           <div className="space-y-3">
             <button
               onClick={handleLogout}
@@ -340,7 +340,7 @@ export const Settings = () => {
             >
               🚪 Sign Out
             </button>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted">
               Sign out of your account. You'll need to sign in again to access your data.
             </p>
           </div>
@@ -364,14 +364,14 @@ export const Settings = () => {
 
         {/* About */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">About</h3>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <h3 className="text-lg font-semibold text-primary mb-4">About</h3>
+          <p className="text-sm text-muted leading-relaxed">
             TakaTracker is a simple, privacy-focused expense tracking app built for Android. 
             It helps you manage your personal finances by tracking income, expenses, and account balances 
             - all stored securely on your device.
           </p>
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <p className="text-xs text-gray-500">
+          <div className="mt-4 pt-4 border-t border-surface-200">
+            <p className="text-xs text-muted">
               Built with React, Capacitor, and SQLite
             </p>
           </div>

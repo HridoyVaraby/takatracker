@@ -79,7 +79,7 @@ export const TransactionForm = ({
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Type Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary mb-2">
               Type
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -96,7 +96,7 @@ export const TransactionForm = ({
                 type="button"
                 onClick={() => setFormData({ ...formData, type: 'expense', category: '' })}
                 className={`btn ${
-                  formData.type === 'expense' ? 'btn-danger' : 'btn-secondary'
+                  formData.type === 'expense' ? 'btn-warning' : 'btn-secondary'
                 }`}
               >
                 💸 Expense
@@ -106,7 +106,7 @@ export const TransactionForm = ({
 
           {/* Account Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary mb-2">
               Account
             </label>
             <select
@@ -125,7 +125,7 @@ export const TransactionForm = ({
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary mb-2">
               Amount (৳)
             </label>
             <input
@@ -141,7 +141,7 @@ export const TransactionForm = ({
 
           {/* Date */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary mb-2">
               Date
             </label>
             <input
@@ -155,7 +155,7 @@ export const TransactionForm = ({
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary mb-2">
               Category
             </label>
             <select
@@ -175,7 +175,7 @@ export const TransactionForm = ({
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-primary mb-2">
               Notes (Optional)
             </label>
             <textarea

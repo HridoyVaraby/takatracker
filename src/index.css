@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-surface-50 text-surface-800;
   }
 }
 
@@ -14,26 +14,55 @@
   }
   
   .btn-primary {
-    @apply bg-primary-500 text-white hover:bg-primary-600;
+    @apply bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700;
   }
   
   .btn-secondary {
-    @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
+    @apply bg-surface-200 text-surface-700 hover:bg-surface-300 active:bg-surface-400;
   }
   
   .btn-success {
-    @apply bg-success text-white hover:bg-green-600;
+    @apply bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700;
   }
   
   .btn-danger {
-    @apply bg-danger text-white hover:bg-red-600;
+    @apply bg-red-500 text-white hover:bg-red-600 active:bg-red-700;
+  }
+  
+  .btn-warning {
+    @apply bg-warning-500 text-white hover:bg-warning-600 active:bg-warning-700;
   }
   
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-4;
+    @apply bg-surface-white rounded-lg shadow-sm border border-surface-200 p-4;
   }
   
   .input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-3 py-2 border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-surface-white text-surface-800 placeholder-surface-500;
+  }
+  
+  /* TakaTracker specific components */
+  .income-indicator {
+    @apply text-accent-500;
+  }
+  
+  .expense-indicator {
+    @apply text-warning-500;
+  }
+  
+  .balance-positive {
+    @apply text-accent-500;
+  }
+  
+  .balance-negative {
+    @apply text-red-500;
+  }
+  
+  .text-muted {
+    @apply text-surface-500;
+  }
+  
+  .text-primary {
+    @apply text-surface-800;
   }
 }

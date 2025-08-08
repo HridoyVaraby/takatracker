@@ -103,7 +103,7 @@ export const Accounts = () => {
         <div className="pb-20">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Account Name
               </label>
               <input
@@ -117,7 +117,7 @@ export const Accounts = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-primary mb-2">
                 Account Type
               </label>
               <select
@@ -174,7 +174,7 @@ export const Accounts = () => {
           </div>
         ) : accounts.length === 0 ? (
           <div className="card text-center py-8">
-            <p className="text-gray-500 mb-4">No accounts found</p>
+            <p className="text-muted mb-4">No accounts found</p>
             <button
               onClick={handleAddAccount}
               className="btn btn-primary"
@@ -192,8 +192,8 @@ export const Accounts = () => {
                       {getAccountIcon(account.type)}
                     </span>
                     <div>
-                      <h3 className="font-medium text-gray-900">{account.name}</h3>
-                      <p className="text-sm text-gray-600">
+                      <h3 className="font-medium text-primary">{account.name}</h3>
+                      <p className="text-sm text-muted">
                         {getAccountTypeLabel(account.type)}
                       </p>
                     </div>
@@ -208,7 +208,7 @@ export const Accounts = () => {
                     {accounts.length > 1 && (
                       <button
                         onClick={() => handleDeleteAccount(account.id!)}
-                        className="text-sm text-danger hover:text-red-700 px-3 py-1 rounded"
+                        className="text-sm text-red-500 hover:text-red-700 px-3 py-1 rounded"
                       >
                         Delete
                       </button>

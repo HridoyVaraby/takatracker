@@ -44,11 +44,11 @@ function App() {
 
   if (initError) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-surface-50 flex items-center justify-center p-4">
         <div className="card max-w-md w-full text-center">
           <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Initialization Error</h2>
-          <p className="text-gray-600 mb-4">{initError}</p>
+          <h2 className="text-xl font-bold text-primary mb-2">Initialization Error</h2>
+          <p className="text-muted mb-4">{initError}</p>
           <button
             onClick={() => window.location.reload()}
             className="btn btn-primary"
@@ -62,11 +62,11 @@ function App() {
 
   if (!isInitialized) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-surface-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">TakaTracker</h2>
-          <p className="text-gray-500">Initializing your expense tracker...</p>
+          <h2 className="text-xl font-semibold text-primary mb-2">TakaTracker</h2>
+          <p className="text-muted">Initializing your expense tracker...</p>
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ function App() {
 
   return (
     <AuthWrapper>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-surface-50">
         {renderCurrentPage()}
         <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
       </div>
